@@ -23,6 +23,12 @@ export default function App() {
     setTask(null);
   };
 
+  const completeTask = (index) => {
+    let itemsCopy = [...taskItems];
+    itemsCopy.splice(index, 1);
+    setTaskItems(itemsCopy);
+  };
+
   return (
     <View style={styles.container}>
       {/* <Text numberOfLines={1} onPress={handlePress}>Now this looks like a job for me so everybody just follows me cos we need a little contreversy and it feels so empty without me lalalala lalalala lalalala lalalala</Text> */}
@@ -30,7 +36,9 @@ export default function App() {
         <Text style={styles.sectionTitle}>Today's tasks</Text>
         <View style={styles.items}>
           {taskItems.map((task, index) => (
-            <TaskCard key={index} text={task} />
+            <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+              <TaskCard text={task} />
+            </TouchableOpacity>
           ))}
           {/* {taskItems.map((task) => (
             <TaskCard key={task.id} text={task} />
